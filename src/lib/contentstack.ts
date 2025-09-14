@@ -59,10 +59,10 @@ export async function getPage(url: string) {
     .addParams({ include_all: true, include_all_depth: 3 }).find()
 
   if (result.entries) {
-    const entry = result.entries[0]
+    const entry = result.entries[0] as any;
 
     if (process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW === 'true') {
-      contentstack.Utils.addEditableTags(entry, 'page', true);
+      contentstack.Utils.addEditableTags(entry, 'product_page', true);
     }
 
     return entry;
