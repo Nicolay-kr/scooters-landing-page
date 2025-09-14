@@ -52,11 +52,11 @@ export function initLivePreview() {
 
 export async function getPage(url: string) {
   const result = await stack
-    .contentType("page")
+    .contentType("product_page")
     .entry()
     .query()
     .where("url", QueryOperation.EQUALS, url)
-    .find<Page>();
+    .addParams({ include_all: true, include_all_depth: 3 }).find()
 
   if (result.entries) {
     const entry = result.entries[0]

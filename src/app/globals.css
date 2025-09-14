@@ -1,6 +1,13 @@
 /* add Tailwind base styles, components, and utilities */
 @import "tailwindcss";
 
+/* Import Ubuntu font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Ubuntu', var(--font-roboto), Arial, sans-serif;
+}
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -23,6 +30,7 @@
   }
 
   a {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #42454A;
   }
 }

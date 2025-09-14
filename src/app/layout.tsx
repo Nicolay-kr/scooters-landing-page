@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import "./globals.css";
 import { ContentstackLivePreview } from "@/components/ContentstackLivePreview";
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '../theme';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
-        <ContentstackLivePreview />
+         <AppRouterCacheProvider>
+           <ThemeProvider theme={theme}>
+             {children}
+             <ContentstackLivePreview />
+           </ThemeProvider>
+         </AppRouterCacheProvider>
       </body>
     </html>
   );
