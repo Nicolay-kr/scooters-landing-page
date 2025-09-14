@@ -24,10 +24,10 @@ export const Navigation = ({ data }: { data: any }): JSX.Element => {
   const signUpButton = navData.user_menu.find((item: any) => item.purpose === 'signup');
 
   const getLinks = (links: any[]) => {
-    return links.map(link => {
+    return links.map((link, index) => {
       if (link.links_dropdowns) {
         return (
-          <Box sx={{ minWidth: 120 }}>
+          <Box key={index} sx={{ minWidth: 120 }}>
             <Button
               sx={{ color: '#42454A', fontSize: '14px', fontFamily: 'Ubuntu-Regular, Helvetica' }}
               id="basic-button"
