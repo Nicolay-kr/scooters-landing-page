@@ -17,7 +17,6 @@ export const Navigation = ({ data }: { data: any }): JSX.Element => {
     setAnchorEl(null);
   };
   const navData = data[0]
-  console.log('navigation data', navData)
 
   const logInButton = navData.user_menu.find((item: any) => item.purpose === 'login');
   const logOutButton = navData.user_menu.find((item: any) => item.purpose === 'logout');
@@ -27,7 +26,7 @@ export const Navigation = ({ data }: { data: any }): JSX.Element => {
     return links.map((link, index) => {
       if (link.links_dropdowns) {
         return (
-          <Box key={index} sx={{ minWidth: 120 }}>
+          <Box key={index} sx={{ minWidth: 120, }}>
             <Button
               sx={{ color: '#42454A', fontSize: '14px', fontFamily: 'Ubuntu-Regular, Helvetica' }}
               id="basic-button"

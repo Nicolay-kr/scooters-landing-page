@@ -147,7 +147,7 @@ export const AccessoriesSection = ({data}: {data: any}): JSX.Element => {
               alt="Shopping Rack"
               width={240}
               height={210}
-              sx={{ position: "relative", mt: 19 }}
+              sx={{ mt: 19 }}
             />
           </Stack>
 

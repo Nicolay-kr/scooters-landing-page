@@ -46,7 +46,6 @@ export const TestimonialsSection = ({data}: {data: any}): JSX.Element => {
                 width: "100%",
                 height: 712,
                 backgroundColor: "#f9f9f9",
-                position: "relative",
                 py: 10,
             }}
         >

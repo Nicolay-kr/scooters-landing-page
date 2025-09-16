@@ -24,7 +24,7 @@ const galleryImages = [
 
 export const GallerySection = ({data}: {data: any}): JSX.Element => {
   return (
-    <Box sx={{ width: "100%", position: "relative", py: 4 }}>
+    <Box sx={{ width: "100%", py: 4 }}>
       {/* Header Section */}
       <Box sx={{ textAlign: "center", mb: 6 }}>
         <Typography
@@ -68,7 +68,6 @@ export const GallerySection = ({data}: {data: any}): JSX.Element => {
                 backgroundImage: `url(${galleryImages[0].image})`,
                 backgroundSize: "100% 100%",
                 borderRadius: "10px",
-                position: "relative",
               }}
             >
               <Typography
@@ -128,7 +127,6 @@ export const GallerySection = ({data}: {data: any}): JSX.Element => {
                   backgroundSize: index === 1 ? "cover" : "100% 100%",
                   backgroundPosition: index === 1 ? "50% 50%" : "center",
                   borderRadius: "10px",
-                  position: "relative",
                 }}
               >
                 <Typography

@@ -6,7 +6,6 @@ export const HighEfficiencySection = ({data}: {data: any}): JSX.Element => {
     <Box
       component="section"
       sx={{
-        position: "relative",
         width: "100%",
         height: 852,
         // backgroundImage: `url(${image16})`,

@@ -2,7 +2,6 @@ import Star from "@mui/icons-material/Star";
 import { Box, Stack, Typography } from "@mui/material";
 import React, { JSX } from "react";
 import Image from "next/image";
-import image14 from "./image-14.png";
 
 const features = [
   "Lightweight aircraft grade aluminium frame",
@@ -52,11 +51,11 @@ export const ProductDetailsSection = ({data}: {data: any}): JSX.Element => {
         >
           <Box
             component={Image}
-            src={image14}
+            src={""}
             alt="Scooter"
             width={748}
             height={400}
-            sx={{ flex: 1, position: "relative", maxWidth: 748, height: 400 }}
+            sx={{ flex: 1,maxWidth: 748, height: 400 }}
           />
 
           <Stack spacing={4} sx={{ flex: 1, maxWidth: 464, pt: 4 }}>

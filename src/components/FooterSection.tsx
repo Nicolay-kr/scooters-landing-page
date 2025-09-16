@@ -23,13 +23,12 @@ export const FooterSection = ({data}: {data: any}): JSX.Element => {
     <Box
       component="footer"
       sx={{
-        position: "relative",
         width: "100%",
         height: 592,
         backgroundColor: "transparent",
       }}
     >
-      <Box sx={{ position: "relative", width: "100%", height: 592 }}>
+      <Box sx={{ width: "100%", height: 592 }}>
         {/* Main footer background */}
         <Box
           sx={{
