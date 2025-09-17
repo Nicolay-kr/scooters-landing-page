@@ -1,10 +1,7 @@
+"use client";
 import React, { JSX } from "react";
-import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
-import Image from "next/image";
-// TODO: Replace with actual image paths or static assets
-const divider = "/divider.png";
-const logo = "/logo.png";
-import { AppBar, Box, Button, Stack, Toolbar, Typography } from "@mui/material";
+
+import { AppBar, Box } from "@mui/material";
 import { AccessoriesSection } from "./AccessoriesSection";
 import { ColorsSection } from "./ColorsSection";
 import { FooterSection } from "./FooterSection";
@@ -14,17 +11,21 @@ import { ProductDetailsSection } from "./ProductDetailsSection";
 import { SubscribeSection } from "./SubscribeSection";
 import { TestimonialsSection } from "./TestimonialsSection";
 import { Navigation } from "./Navigation";
-// import features from "./features.png";
-// import hero from "./hero.png";
-
-const navigationItems = [
-  { label: "PRODUCTS", hasDropdown: true },
-  { label: "GALLERY", hasDropdown: false },
-  { label: "CONTACT", hasDropdown: false },
-];
+import { HeroSection } from "./HeroSection";
 
 export const LandingPage = ({ data }: { data: any }): JSX.Element => {
-  console.log('page data', data);
+  console.log("page data", data);
+
+  const sectionComponents: Record<string, (props: any) => JSX.Element> = {
+    product_information: (props) => <ProductDetailsSection {...props} />,
+    high_efficiency_motor: (props) => <HighEfficiencySection {...props} />,
+    multiple_accessories: (props) => <AccessoriesSection {...props} />,
+    // gallery: (props) => <GallerySection {...props} />,
+    // colors: (props) => <ColorsSection {...props} />,
+    testimonials: (props) => <TestimonialsSection {...props} />,
+    subscribe_to_newsletter: (props) => <SubscribeSection {...props} />,
+  };
+
   return (
     <Box sx={{ bgcolor: "white", width: "100vw" }}>
       <Box
@@ -32,42 +33,39 @@ export const LandingPage = ({ data }: { data: any }): JSX.Element => {
           bgcolor: "white",
           overflow: "hidden",
           width: "100%",
-          position: "relative",
         }}
       >
-        <AppBar>
+        <AppBar
+          sx={{
+            top: 0,
+            minHeight: "120px",
+            bgcolor: "white",
+            boxShadow: "none",
+            borderBottom: "1px solid #E0E0E0",
+          }}
+        >
           <Navigation data={data.page_header} />
         </AppBar>
 
-        <Box sx={{ position: "relative", width: "100%", mt: "134px", px: 3 }}>
-          {/* <Box
-            component={Image}
-            src={hero}
-            alt="Hero"
-            width={1390}
-            height={807}
-            priority
-            sx={{ position: "relative", width: "100%", maxWidth: 1390, height: 807 }}
-          /> */}
-          {/* <Box
-            component={Image}
-            src={features}
-            alt="Features"
-            width={1393}
-            height={190}
-            sx={{ position: "relative", width: "100%", maxWidth: 1393, height: 190, mt: -1 }}
-          /> */}
-        </Box>
-
-        {/* <ProductDetailsSection data={data} /> */}
-        {/* <HighEfficiencySection data={data} /> */}
-        {/* <AccessoriesSection data={data} /> */}
-        {/* <GallerySection data={data} /> */}
-        {/* <ColorsSection data={data} /> */}
-        {/* <TestimonialsSection data={data} /> */}
-        {/* <SubscribeSection data={data} /> */}
-        {/* <FooterSection data={data} /> */}
-      </Box >
-    </Box >
+        <HeroSection
+          heading={data.heading}
+          cta={data.cta}
+          productImageGallery={data.product_image_gallery}
+          characteristicCards={data.characteristic_cards}
+        />
+      </Box>
+      {Array.isArray(data.page_sections) &&
+        data.page_sections.map((section: any, idx: number) => {
+          const key = Object.keys(section).find(
+            (k) => k !== "$" && k !== "_metadata"
+          );
+          if (!key) return null;
+          const Component = sectionComponents[key];
+          return Component ? (
+            <Component key={key + idx} data={section[key]} />
+          ) : null;
+        })}
+      <FooterSection data={data.page_footer[0]} />
+    </Box>
   );
 };

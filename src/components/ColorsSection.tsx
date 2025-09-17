@@ -12,10 +12,9 @@ const colorSwatches = [
 
 export const ColorsSection = ({data}: {data: any}): JSX.Element => {
   return (
-    <Box sx={{ position: "relative", width: "100%", height: "1266px" }}>
+    <Box sx={{ width: "100%", height: "1266px" }}>
       <Box
         sx={{
-          position: "relative",
           width: "100%",
           height: "1040px",
           mt: "226px",
@@ -55,14 +54,12 @@ export const ColorsSection = ({data}: {data: any}): JSX.Element => {
             <Box
               key={swatch.id}
               sx={{
-                position: "relative",
                 width: "266px",
                 height: "264px",
               }}
             >
               <Box
                 sx={{
-                  position: "relative",
                   width: "383px",
                   height: "404px",
                   top: "-55px",

@@ -1,6 +1,6 @@
 "use client";
 import React, { JSX } from "react";
-import Image from "next/image";
+import { ContentStackImage } from "./ContentStackImage";
 import { AppBar, Box, Button, Menu, MenuItem, Stack, Toolbar, Typography } from "@mui/material";
 import Link from "next/link";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -17,7 +17,6 @@ export const Navigation = ({ data }: { data: any }): JSX.Element => {
     setAnchorEl(null);
   };
   const navData = data[0]
-  console.log('navigation data', navData)
 
   const logInButton = navData.user_menu.find((item: any) => item.purpose === 'login');
   const logOutButton = navData.user_menu.find((item: any) => item.purpose === 'logout');
@@ -27,7 +26,7 @@ export const Navigation = ({ data }: { data: any }): JSX.Element => {
     return links.map((link, index) => {
       if (link.links_dropdowns) {
         return (
-          <Box key={index} sx={{ minWidth: 120 }}>
+          <Box key={index} sx={{ minWidth: 120, }}>
             <Button
               sx={{ color: '#42454A', fontSize: '14px', fontFamily: 'Ubuntu-Regular, Helvetica' }}
               id="basic-button"
@@ -90,10 +89,11 @@ export const Navigation = ({ data }: { data: any }): JSX.Element => {
           }}
           {...(navData.logo.is_clickable ? { component: Link, href: navData.logo.link.href } : {})}
         >
-          <Image
-            src={navData.logo.image.url}
+          <ContentStackImage
+            url={navData.logo.image.url}
             alt={navData.logo.alt}
-            fill
+            width={69}
+            height={47}
             style={{ objectFit: "contain" }}
           />
         </Box>

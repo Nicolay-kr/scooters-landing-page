@@ -1,126 +1,125 @@
-import Image from "next/image";
+import { ContentStackImage } from "./ContentStackImage";
 import { Box, Link, Stack, Typography } from "@mui/material";
 import React, { JSX } from "react";
 
-// Footer data structure
-const footerSections = [
-  {
-    title: "About",
-    links: ["Company", "Teams", "Profile", "Careers"],
-  },
-  {
-    title: "Resources",
-    links: ["Contact", "Application", "FQA", "Features"],
-  },
-  {
-    title: "Legals",
-    links: ["Copyright", "Privacy Policy", "Disclaimer", "Terms"],
-  },
-];
+export const FooterSection = ({ data }: { data: any }): JSX.Element => {
+  console.log("data.image.image.url:", data);
 
-export const FooterSection = ({data}: {data: any}): JSX.Element => {
+  const template = data.copyright_text.text;
+  const dateStr = data.copyright_text.date;
+  const year = new Date(dateStr).getFullYear();
+  const copyRightText = template.replace("{date}", year.toString());
+
   return (
     <Box
       component="footer"
       sx={{
-        position: "relative",
         width: "100%",
-        height: 592,
-        backgroundColor: "transparent",
       }}
     >
-      <Box sx={{ position: "relative", width: "100%", height: 592 }}>
-        {/* Main footer background */}
+      <Box
+        sx={{
+          width: "100%",
+          height: 592,
+          position: "relative",
+          backgroundColor: "#42454a",
+        }}
+      >
         <Box
           sx={{
-            position: "absolute",
+            position: "relative",
             width: "100%",
-            maxWidth: 1440,
-            height: 500,
-            top: 92,
-            left: "50%",
-            transform: "translateX(-50%)",
-            backgroundColor: "#42454a",
+            height: 92,
+            backgroundColor: "white",
           }}
         />
 
-        {/* Decorative image */}
-        {/* <Box
-          component={Image}
-          src={image13}
-          alt="Image"
-          width={729}
-          height={551}
-          sx={{ position: "absolute", top: 0, left: 0, transform: "rotate(180deg)" }}
-        /> */}
+        {data?.image && (
+          <ContentStackImage
+            url={data.image.image.url}
+            alt={data.image.image.alt}
+            width={550}
+            height={550}
+            containerSx={{ position: "absolute", left: "-60px", top: 0 }}
+          />
+        )}
 
-        {/* Social media icons */}
-        {/* TODO: Add social media icons as <Image /> or SVGs here if available */}
+        <Stack direction="row" spacing={2} sx={{ mt: "80px" }}>
+          <Box sx={{ position: "relative", width: "550px" }} />
 
-        {/* Copyright text */}
-        <Typography
-          sx={{
-            position: "absolute",
-            top: 538,
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontFamily: "Poppins, Helvetica",
-            fontWeight: 400,
-            color: "#fbfbfb",
-            fontSize: 16,
-            textAlign: "center",
-          }}
-        >
-          © Copyright 2021. All rights reserved.
-        </Typography>
+          <Stack
+            direction="row"
+            spacing={25}
+          >
+            {data.footer_links.links_group.map((section: any, index: any) => (
+              <Box key={index} sx={{ minWidth: 103 }}>
+                <Typography
+                  sx={{
+                    fontFamily: "Ubuntu, Helvetica",
+                    fontWeight: 700,
+                    color: "#fbfbfb",
+                    fontSize: 22,
+                    mb: 7.5,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {section.group_name}
+                </Typography>
+                <Stack spacing={3}>
+                  {section.links.map((link: any, linkIndex: number) => (
+                    <Link
+                      key={linkIndex}
+                      href={link.link.link.href}
+                      target={
+                        link.link.link.open_in_new_window ? "_blank" : "_self"
+                      }
+                      sx={{
+                        fontFamily: "Ubuntu, Helvetica",
+                        fontWeight: 400,
+                        color: "#fbfbfb",
+                        fontSize: 16,
+                        textDecoration: "none",
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
+                      }}
+                    >
+                      {link.link.link.title}
+                    </Link>
+                  ))}
+                </Stack>
 
-        {/* Footer sections */}
-        <Stack
-          direction="row"
-          spacing={25}
-          sx={{
-            position: "absolute",
-            top: 191,
-            right: 210,
-          }}
-        >
-          {footerSections.map((section, index) => (
-            <Box key={index} sx={{ minWidth: 103 }}>
-              <Typography
-                sx={{
-                  fontFamily: "Ubuntu, Helvetica",
-                  fontWeight: 700,
-                  color: "#fbfbfb",
-                  fontSize: 22,
-                  mb: 7.5,
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {section.title}
-              </Typography>
-              <Stack spacing={3.375}>
-                {section.links.map((linkText, linkIndex) => (
-                  <Link
-                    key={linkIndex}
-                    href="#"
-                    sx={{
-                      fontFamily: "Ubuntu, Helvetica",
-                      fontWeight: 400,
-                      color: "#fbfbfb",
-                      fontSize: 16,
-                      textDecoration: "none",
-                      "&:hover": {
-                        textDecoration: "underline",
-                      },
-                    }}
-                  >
-                    {linkText}
-                  </Link>
-                ))}
-              </Stack>
-            </Box>
-          ))}
+                {index === 2 && (
+                  <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
+                    {data.icons.map((icon: any, index: number) => (
+                      <ContentStackImage
+                        key={icon.icon._metadata.uid || index}
+                        url={icon.icon.image.url}
+                        alt={icon.icon.image.alt || `icon-${index}`}
+                        width={32}
+                        height={32}
+                        containerSx={{ cursor: "pointer" }}
+                      />
+                    ))}
+                  </Stack>
+                )}
+              </Box>
+            ))}
+          </Stack>
         </Stack>
+        <Box sx={{ backgroundColor: "#42454a", mt: 10 }}>
+          <Typography
+            sx={{
+              fontFamily: "Poppins, Helvetica",
+              fontWeight: 400,
+              color: "#fbfbfb",
+              fontSize: 16,
+              textAlign: "center",
+            }}
+          >
+            {copyRightText}
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
