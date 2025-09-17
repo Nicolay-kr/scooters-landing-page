@@ -1,30 +1,20 @@
 "use client";
 import React, { JSX } from "react";
+import { ContentStackImage } from "./ContentStackImage";
 import Image from "next/image";
 import {
   AppBar,
   Box,
   Button,
   Container,
-  Menu,
-  MenuItem,
   Paper,
-  Popover,
-  Popper,
   Stack,
-  Toolbar,
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import { renderContentstackRTE } from "./renderContentstackRTE";
+import { renderContentstackRTE } from "../lib/utils";
 
-const featureCard = ({
-  characteristic,
-  description,
-}: {
-  characteristic: any;
-  description: any;
-}): JSX.Element => {
+const featureCard = ({ characteristic, description }: { characteristic: any; description: any }): JSX.Element => {
   return (
     <Paper
       sx={{
@@ -164,18 +154,15 @@ export const HeroSection = ({
                   height: "80px",
                   cursor: "pointer",
                   position: "relative",
-                  "&>img": { position: "relative" },
                 }}
               >
-                <img
-                  src={cta[1].icon.url}
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                  }}
+                <ContentStackImage
+                  url={cta[1].icon.url}
                   alt="Call to Action"
+                  width={80}
+                  height={80}
+                  containerSx={{ position: "absolute" }}
+                  style={{ objectFit: "contain" }}
                 />
               </Box>
             </Box>
@@ -192,10 +179,12 @@ export const HeroSection = ({
           }}
         >
           <Box sx={{ width: "100%", mt: 2, height: "62vh" }}>
-            <img
-              src={productImageGallery[0].image.image.url}
-              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            <ContentStackImage
+              url={productImageGallery[0].image.image.url}
               alt="Hero"
+              width="100%"
+              height="100%"
+              style={{ objectFit: "contain" }}
             />
           </Box>
           <Box
@@ -242,10 +231,11 @@ export const HeroSection = ({
                   fontSize: 24,
                 }}
               >
-                <img
-                  src="/left-arrow.svg"
+                <ContentStackImage
+                  url="/left-arrow.svg"
                   alt="Left Arrow"
-                  style={{ width: 10, height: 10 }}
+                  width={10}
+                  height={10}
                 />
               </Button>
               <Button
@@ -258,10 +248,11 @@ export const HeroSection = ({
                   fontSize: 24,
                 }}
               >
-                <img
-                  src="/right-arrow.svg"
+                <ContentStackImage
+                  url="/right-arrow.svg"
                   alt="Right Arrow"
-                  style={{ width: 10, height: 10 }}
+                  width={10}
+                  height={10}
                 />
               </Button>
             </Box>

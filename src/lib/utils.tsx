@@ -8,7 +8,7 @@ export function renderContentstackRTE(rteJson: any): React.ReactNode {
     switch (node.type) {
       case "p":
         return (
-          <Typography key={idx} paragraph>
+          <Typography key={node.uid} paragraph>
             {renderContentstackRTE(node.children)}
           </Typography>
         );
@@ -19,15 +19,15 @@ export function renderContentstackRTE(rteJson: any): React.ReactNode {
       case "h5":
       case "h6":
         return (
-          <Typography key={idx} variant={node.type}>
+          <Typography key={node.uid} variant={node.type}>
             {renderContentstackRTE(node.children)}
           </Typography>
         );
       case "hr":
-        return <Box key={idx} component="hr" sx={{ my: 2 }} />;
+        return <Box key={node.uid} component="hr" sx={{ my: 2 }} />;
       case "ul":
         return (
-          <List key={idx}>
+          <List key={node.uid}>
             {node.children?.map((item: any, i: number) => (
               <ListItem key={i}>{renderContentstackRTE(item.children)}</ListItem>
             ))}
@@ -35,20 +35,20 @@ export function renderContentstackRTE(rteJson: any): React.ReactNode {
         );
       case "li":
         return (
-          <ListItem key={idx}>{renderContentstackRTE(node.children)}</ListItem>
+          <ListItem key={node.uid}>{renderContentstackRTE(node.children)}</ListItem>
         );
       default:
         // Handle text and inline formatting (bold, italic, underline)
         if (node.text !== undefined) {
           let textElem: React.ReactNode = node.text;
           if (node.bold) {
-            textElem = <Box component="span" fontWeight="bold">{textElem}</Box>;
+            textElem = <Box key={node.uid} component="span" fontWeight="bold">{textElem}</Box>;
           }
           if (node.italic) {
-            textElem = <Box component="span" fontStyle="italic">{textElem}</Box>;
+            textElem = <Box key={node.uid} component="span" fontStyle="italic">{textElem}</Box>;
           }
           if (node.underline) {
-            textElem = <Box component="span" sx={{ textDecoration: "underline" }}>{textElem}</Box>;
+            textElem = <Box key={node.uid} component="span" sx={{ textDecoration: "underline" }}>{textElem}</Box>;
           }
           return textElem;
         }
