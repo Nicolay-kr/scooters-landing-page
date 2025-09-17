@@ -20,7 +20,7 @@ export default async function Home({
     });
   }
 
-  const page = await getPage("/scooter-model-a");
+  const page = await getPage("/products/scooter-model-a");
 
   return (
     <LandingPage data={page} />
