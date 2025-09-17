@@ -20,6 +20,7 @@ export const AccessoriesSection = ({ data }: { data: any }): JSX.Element => {
       <Stack direction="column" gap={10} sx={{ mt: 10 }}>
         {accessories.map((item: any, idx: number) => (
           <Stack
+            key={item._metadata?.uid || idx}
             direction={idx === 0 ? "row" : "row-reverse"}
             spacing={10}
             alignItems="center"
