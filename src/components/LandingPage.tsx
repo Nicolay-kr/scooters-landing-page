@@ -62,7 +62,7 @@ export const LandingPage = ({ data }: { data: any }): JSX.Element => {
           if (!key) return null;
           const Component = sectionComponents[key];
           return Component ? (
-            <Component key={key + idx} data={section[key]} />
+            section[key].show_section && <Component key={key + idx} data={section[key]} />
           ) : null;
         })}
       <FooterSection data={data.page_footer[0]} />
